@@ -5,47 +5,51 @@ import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 public class CutterAidFrame extends JFrame {
     public CutterAidFrame() {
-        String[] labels = {"Width", "Length"};
         setTitle("CutterAid");
         setSize(850, 550);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+        // Main Panel
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+        // Paper size label panel
+        JPanel initPanel = new JPanel();
+        initPanel.setLayout(new BoxLayout(initPanel, BoxLayout.Y_AXIS));
+        JLabel initLabel = new JLabel("Paper Size");
+        Font initLabelFont = initLabel.getFont();
+        initLabel.setFont(initLabelFont.deriveFont(20f));
+        initLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        initPanel.add(initLabel);
+        initPanel.add(Box.createVerticalStrut(10));
+        mainPanel.add(initPanel);
+        // Paper size label/spinner panel
+        JPanel firstLabelSpinnerPanel = new JPanel();
+        firstLabelSpinnerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        firstLabelSpinnerPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        // Paper size width label/spinner
+        JLabel firstLabel = new JLabel("Width:");
+        JSpinner firstSpinner = new JSpinner(new SpinnerNumberModel(0,0,26,1));
+        firstLabelSpinnerPanel.add(firstLabel);
+        firstLabelSpinnerPanel.add(firstSpinner);
+        firstLabelSpinnerPanel.add(Box.createHorizontalStrut(10));
+        // Paper size length label/spinner
+        JLabel secondLabel = new JLabel("Length");
+        JSpinner secondSpinner = new JSpinner(new SpinnerNumberModel(0,0,26,1));
+        firstLabelSpinnerPanel.add(secondLabel);
+        firstLabelSpinnerPanel.add(secondSpinner);
+        mainPanel.add(firstLabelSpinnerPanel);
+        //Final size label
+        JPanel finalPanel = new JPanel();
+        finalPanel.setLayout(new BoxLayout(finalPanel, BoxLayout.Y_AXIS));
+        JLabel finalLabel = new JLabel("Final size");
+        Font finalLabelFont = finalLabel.getFont();
+        finalLabel.setFont(finalLabelFont.deriveFont(20f));
+        finalLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        mainPanel.add(finalLabel);
+        mainPanel.add(Box.createVerticalStrut(1));
+        getContentPane().add(mainPanel);
 
-        JPanel panel = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        JButton button = new JButton("Submit");
 
-        gbc.insets = new Insets(5,5,5,5);
-        for (int i = 0; i < 2; i++) {
-            gbc.gridx = 0;
-            gbc.gridy = i;
-            gbc.anchor = GridBagConstraints.WEST;
-            gbc.weightx = 0;
-            gbc.gridwidth = 1;
-            JLabel label = new JLabel(labels[i] + ":");
-            panel.add(label, gbc);
-
-            gbc.gridx = 1;
-            gbc.gridwidth = GridBagConstraints.REMAINDER;
-            gbc.anchor = GridBagConstraints.WEST;
-            gbc.weightx = 1;
-            JSpinner spinner = new JSpinner();
-            spinner.setPreferredSize(new Dimension(35, 20));
-            panel.add(spinner, gbc);
-        }
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.gridx = 0;
-        gbc.gridy = GridBagConstraints.RELATIVE;
-        gbc.anchor = GridBagConstraints.SOUTHEAST;
-        gbc.insets = new Insets(10,10,10,10);
-        panel.add(button, gbc);
-        getContentPane().add(panel);
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Submitted");
-            }
-        });
     }
 }

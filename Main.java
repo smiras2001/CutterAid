@@ -1,10 +1,7 @@
 public class Main {
     public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                    CutterAidFrame cutterAidFrame = new CutterAidFrame();
-                }
-        });
+        javax.swing.SwingUtilities.invokeLater(() -> {
+                CutterAidFrame cutterAidFrame = new CutterAidFrame();
+            });
     }
 }

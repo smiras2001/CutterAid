@@ -5,7 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 public class CutterAidFrame extends JFrame {
     public CutterAidFrame() {
-
+        String[] labels = {"Width", "Length"};
         setTitle("CutterAid");
         setSize(850, 550);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -15,14 +15,22 @@ public class CutterAidFrame extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         JButton button = new JButton("Submit");
 
-        gbc.gridx = 0;
-        gbc.weightx = 1;
-        gbc.weighty = 1;
-        gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.insets = new Insets(5,5,5,5);
-        for (int i = 0; i < 4; i++) {
-            JSpinner spinner = new JSpinner();
+        for (int i = 0; i < 2; i++) {
+            gbc.gridx = 0;
             gbc.gridy = i;
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.weightx = 0;
+            gbc.gridwidth = 1;
+            JLabel label = new JLabel(labels[i] + ":");
+            panel.add(label, gbc);
+
+            gbc.gridx = 1;
+            gbc.gridwidth = GridBagConstraints.REMAINDER;
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.weightx = 1;
+            JSpinner spinner = new JSpinner();
+            spinner.setPreferredSize(new Dimension(35, 20));
             panel.add(spinner, gbc);
         }
         gbc.weightx = 1.0;

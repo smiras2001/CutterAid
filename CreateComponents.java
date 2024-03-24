@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 public class CreateComponents {
     public static JPanel createMainPanel() {
         JPanel mainPanel = new JPanel();
@@ -36,5 +37,10 @@ public class CreateComponents {
             }
         });
         return button;
+    }
+    public static JTextArea createTextArea() {
+        JTextArea output = new JTextArea();
+        output.setEditable(false);
+        return output;
     }
 }

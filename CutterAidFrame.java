@@ -14,7 +14,7 @@ public class CutterAidFrame extends JFrame {
 
     private void configureFrame() {
         setTitle("CutterAid");
-        setSize(850, 550);
+        setSize(350, 550);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
@@ -25,7 +25,8 @@ public class CutterAidFrame extends JFrame {
         addFinalSize(mainPanel);
         addUpness(mainPanel);
         addMidSpace(mainPanel);
-        addButton(mainPanel);
+        addSubmitButton(mainPanel);
+        addTextArea(mainPanel);
         getContentPane().add(mainPanel);
     }
 
@@ -87,8 +88,14 @@ public class CutterAidFrame extends JFrame {
         mainPanel.add(midSpacePanel);
     }
 
-    private void addButton (JPanel mainPanel) {
+    private void addSubmitButton (JPanel mainPanel) {
         JButton submitButton = CreateComponents.createButton("Submit");
         mainPanel.add(submitButton);
+    }
+
+    private void addTextArea (JPanel mainPanel) {
+        JTextArea textArea = CreateComponents.createTextArea();
+        mainPanel.add(Box.createVerticalStrut(15));
+        mainPanel.add(textArea);
     }
 }

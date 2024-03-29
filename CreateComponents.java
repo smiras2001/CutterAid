@@ -7,6 +7,7 @@ public class CreateComponents {
     public static JPanel createMainPanel() {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setAutoscrolls(true);
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         return mainPanel;
     }
@@ -28,19 +29,23 @@ public class CreateComponents {
         return panel;
     }
 
-    public static JButton createButton(String buttonText) {
+    public static JButton createButton(String buttonText, CutterAidFrame frame, JTextArea outputTextArea) {
         JButton button = new JButton(buttonText);
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Submitted");
+                double output = frame.getInitWidth();
+                outputTextArea.append("Output: " + output);
             }
         });
         return button;
     }
-    public static JTextArea createTextArea() {
+
+    public static JScrollPane createTextArea() {
         JTextArea output = new JTextArea();
         output.setEditable(false);
-        return output;
+        JScrollPane scrollPane = new JScrollPane(output);
+        scrollPane.setPreferredSize(new Dimension(300, 450));
+        return scrollPane;
     }
 }

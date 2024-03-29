@@ -3,6 +3,15 @@ import java.awt.*;
 import javax.swing.JFrame;
 
 public class CutterAidFrame extends JFrame {
+    private JSpinner initWidth;
+    private JSpinner initLength;
+    private JSpinner finalWidth;
+    private JSpinner finalLength;
+    private JSpinner upness;
+    private JSpinner midWidth;
+    private JSpinner midLength;
+
+
     public CutterAidFrame() {
         initializeUI();
     }
@@ -26,7 +35,6 @@ public class CutterAidFrame extends JFrame {
         addUpness(mainPanel);
         addMidSpace(mainPanel);
         addSubmitButton(mainPanel);
-        addTextArea(mainPanel);
         getContentPane().add(mainPanel);
     }
 
@@ -36,7 +44,9 @@ public class CutterAidFrame extends JFrame {
         mainPanel.add(Box.createVerticalStrut(1));
 
         JPanel firstLabelSpinnerPanel = CreateComponents.createLabelSpinnerPanel("Width:", 11,0, 26,1);
+        initWidth = (JSpinner)firstLabelSpinnerPanel.getComponent(1);
         JPanel secondLabelSpinnerPanel = CreateComponents.createLabelSpinnerPanel("Length:", 17, 0,26, 1);
+        initLength = (JSpinner)secondLabelSpinnerPanel.getComponent(1);
         JPanel paperSizePanel = new JPanel();
         paperSizePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         paperSizePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -51,7 +61,9 @@ public class CutterAidFrame extends JFrame {
         mainPanel.add(Box.createVerticalStrut(1));
 
         JPanel firstLabelSpinnerPanel = CreateComponents.createLabelSpinnerPanel("Width:", 0,0, 26,1);
+        finalWidth = (JSpinner)firstLabelSpinnerPanel.getComponent(1);
         JPanel secondLabelSpinnerPanel = CreateComponents.createLabelSpinnerPanel("Length:", 0, 0,26, 1);
+        finalLength = (JSpinner)secondLabelSpinnerPanel.getComponent(1);
         JPanel paperSizePanel = new JPanel();
         paperSizePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         paperSizePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -66,6 +78,7 @@ public class CutterAidFrame extends JFrame {
         mainPanel.add(Box.createVerticalStrut(1));
 
         JPanel thirdLabelSpinnerPanel = CreateComponents.createLabelSpinnerPanel("Up:", 1, 0, 26,1);
+        upness = (JSpinner)thirdLabelSpinnerPanel.getComponent(1);
         JPanel finalSizePanel = new JPanel();
         finalSizePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         finalSizePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -79,7 +92,9 @@ public class CutterAidFrame extends JFrame {
         mainPanel.add(Box.createVerticalStrut(1));
 
         JPanel fourthLabelSpinnerPanel = CreateComponents.createLabelSpinnerPanel("Width:", 0,0, .75,.125);
+        midWidth = (JSpinner)fourthLabelSpinnerPanel.getComponent(1);
         JPanel fifthLabelSpinnerPanel = CreateComponents.createLabelSpinnerPanel("Length:", 0, 0,.75, .125);
+        midLength = (JSpinner)fifthLabelSpinnerPanel.getComponent(1);
         JPanel midSpacePanel = new JPanel();
         midSpacePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         midSpacePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -89,13 +104,14 @@ public class CutterAidFrame extends JFrame {
     }
 
     private void addSubmitButton (JPanel mainPanel) {
-        JButton submitButton = CreateComponents.createButton("Submit");
+        JScrollPane scrollPane = CreateComponents.createTextArea();
+        JTextArea outputTextArea = (JTextArea) ((JViewport) scrollPane.getComponent(0)).getView();
+        JButton submitButton = CreateComponents.createButton("Submit", this, outputTextArea);
         mainPanel.add(submitButton);
+        mainPanel.add(scrollPane);
     }
 
-    private void addTextArea (JPanel mainPanel) {
-        JTextArea textArea = CreateComponents.createTextArea();
-        mainPanel.add(Box.createVerticalStrut(15));
-        mainPanel.add(textArea);
+    public double getInitWidth() {
+        return (double) initWidth.getValue();
     }
 }

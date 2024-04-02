@@ -29,13 +29,16 @@ public class CreateComponents {
         return panel;
     }
 
-    public static JButton createButton(String buttonText, CutterAidFrame frame, JTextArea outputTextArea) {
+    public static JButton createButton(String buttonText, CutterAidFrame frame, JTextArea outputTextArea, JSpinner initWidth,
+                                        JSpinner initLength, JSpinner finalWidth, JSpinner finalLength, JSpinner upness,
+                                        JSpinner midWidth, JSpinner midLength) {
         JButton button = new JButton(buttonText);
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                double output = frame.getInitWidth();
-                outputTextArea.append("Output: " + output);
+                outputTextArea.setText("");
+                CutCalculation.printCutCalculation(initWidth, initLength, finalWidth, finalLength,
+                                                    upness, midWidth, midLength, outputTextArea);
             }
         });
         return button;
